@@ -200,8 +200,12 @@ print('Test Accuracy:',score[1])
  
  
 # STORE THE MODEL AS A PICKLE OBJECT
-#pickle_out= open("model_trained.p","wb")  # wb = WRITE BYTE
-#pickle.dump(model,pickle_out)
-#pickle_out.close()
+# pickle_out= open("model_trained.p","wb")  # wb = WRITE BYTE
+# pickle.dump(model,pickle_out)
+# pickle_out.close()
+
+################################ store the model
 model.save('model_trained.h5');
 cv2.waitKey(0)
+
+
