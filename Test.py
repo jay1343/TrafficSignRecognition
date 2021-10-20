@@ -21,8 +21,8 @@ cap.set(3, frameWidth)
 cap.set(4, frameHeight)
 cap.set(10, brightness)
 # IMPORT THE TRANNIED MODEL
-#pickle_in=open("model_trained.p","rb")  ## rb = READ BYTE
-#model=pickle.load(pickle_in)
+# pickle_in=open("model_trained.p","rb")  ## rb = READ BYTE
+# model=pickle.load(pickle_in)
 
 model = Sequential()
 model = load_model('model_trained.h5')
@@ -30,14 +30,17 @@ model = load_model('model_trained.h5')
 def grayscale(img):
     img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
     return img
+  
 def equalize(img):
     img =cv2.equalizeHist(img)
     return img
+  
 def preprocessing(img):
     img = grayscale(img)
     img = equalize(img)
     img = img/255
     return img
+   
 def getCalssName(classNo):
     if   classNo == 0: return 'Speed Limit 20 km/h'
     elif classNo == 1: return 'Speed Limit 30 km/h'
@@ -100,6 +103,7 @@ while True:
     predictions = model.predict(img)
     classIndex = np.argmax(model.predict(img))
     probabilityValue =np.amax(predictions)
+    
     if probabilityValue > threshold:
         #print(getCalssName(classIndex))
         cv2.putText(imgOrignal,str(classIndex)+" "+str(getCalssName(classIndex)), (120, 35), font, 0.75, (0, 0, 255), 2, cv2.LINE_AA)
